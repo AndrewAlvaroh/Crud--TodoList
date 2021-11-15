@@ -3,6 +3,9 @@ import React, { Component } from 'react'
 const stylee = {
     textAlign : "center"
 }
+const stylebtn = {
+    display : "inline-block",
+}
 
 export class App extends Component {
   state = {
@@ -24,6 +27,15 @@ export class App extends Component {
       inputValue : ""
     })
   }
+
+  deleteHandler = (valueList) => {
+    const newTodoList = this.state.todoList.filter(list => {
+      return list !== valueList ;
+    })
+    this.setState({
+      todoList : newTodoList
+    })
+  }
   render() {
     return (
       <div style={stylee}>
@@ -43,7 +55,8 @@ export class App extends Component {
             this.state.todoList.map((list,index) => {
                 return(
                   <div key={index + list }>
-                    {list}
+                    <p  style={stylebtn}>{list}</p> 
+                    <button onClick={() => this.deleteHandler(list)} style={{color: "red"}}>delete</button>
                   </div>
                 )
             })
